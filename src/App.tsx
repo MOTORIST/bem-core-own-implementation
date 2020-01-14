@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import EditableText from './components/EditableText';
+import { EditableText_TypeProps } from './components/EditableText/_type';
 import './App.css';
 
 const App: React.FC = () => {
+  const [type, setType] = useState<EditableText_TypeProps>('text');
+  const handleTypeSwitch = () => {
+    setType(type === 'textarea' ? 'text' : 'textarea');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button type="button" onClick={handleTypeSwitch}>
+        {type === 'text' ? 'Edit text' : 'Save text'}
+      </button>
+      <br />
+      <br />
+      <EditableText type={type} cols={50} rows={20}>
+        Demo text
+      </EditableText>
     </div>
   );
-}
+};
 
 export default App;
